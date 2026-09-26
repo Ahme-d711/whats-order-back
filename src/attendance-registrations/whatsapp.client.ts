@@ -1,9 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import axios from 'axios';
 
-export const ATTENDANCE_TEST_MESSAGE =
-  'رسالة اختبار من WhatsOrder. لو وصلتك يبقى الإرسال شغال.';
-
 @Injectable()
 export class WhatsAppClient {
   private readonly logger = new Logger(WhatsAppClient.name);
