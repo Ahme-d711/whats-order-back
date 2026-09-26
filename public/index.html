@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="تسجيل حضور تدريب مهاستور للتجار وأصحاب البيزنس"
+    />
+    <title>سجل حضورك الآن | مهاستور</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="registration-card" aria-labelledby="form-title">
+        <header class="card-header">
+          <h1 id="form-title">
+            سجل حضورك الآن <span aria-hidden="true">👥</span>
+          </h1>
+          <p>
+            أكد حضورك في ويبينار التجارة للتجار وأصحاب البيزنس المباشر<br />والاستراتيجيات
+            في مواعيدها.
+          </p>
+        </header>
+
+        <form id="attendance-form" novalidate>
+          <div class="field">
+            <label for="fullName"
+              >الاسم الكامل <span aria-hidden="true">*</span></label
+            >
+            <input
+              id="fullName"
+              name="fullName"
+              type="text"
+              autocomplete="name"
+              minlength="2"
+              maxlength="120"
+              placeholder="محمود"
+              required
+              aria-describedby="fullName-error"
+            />
+            <p class="field-error" id="fullName-error"></p>
+          </div>
+
+          <div class="field">
+            <label for="whatsOrderPhone">
+              رقم الهاتف المسجل في WhatsOrder <span aria-hidden="true">*</span>
+            </label>
+            <div class="phone-input" dir="ltr">
+              <span class="country-code" aria-hidden="true">
+                <span>🇪🇬</span>
+                <span>+20</span>
+              </span>
+              <input
+                id="whatsOrderPhone"
+                name="whatsOrderPhone"
+                type="tel"
+                inputmode="numeric"
+                autocomplete="tel-national"
+                maxlength="11"
+                placeholder="1012345678"
+                required
+                aria-label="رقم الهاتف المصري بدون كود الدولة"
+                aria-describedby="whatsOrderPhone-hint whatsOrderPhone-error"
+              />
+            </div>
+            <p class="hint" id="whatsOrderPhone-hint">
+              أدخل رقم الموبايل المكوّن من 10 أو 11 رقمًا.
+            </p>
+            <p class="field-error" id="whatsOrderPhone-error"></p>
+          </div>
+
+          <div class="field">
+            <label for="activity"
+              >اسم أو نوع النشاط <span aria-hidden="true">*</span></label
+            >
+            <input
+              id="activity"
+              name="activity"
+              type="text"
+              autocomplete="organization"
+              minlength="2"
+              maxlength="120"
+              placeholder="مطعم أو كافيه"
+              required
+              aria-describedby="activity-error"
+            />
+            <p class="field-error" id="activity-error"></p>
+          </div>
+
+          <div class="field">
+            <label for="address"
+              >العنوان بالكامل <span aria-hidden="true">*</span></label
+            >
+            <textarea
+              id="address"
+              name="address"
+              autocomplete="street-address"
+              minlength="10"
+              maxlength="500"
+              rows="3"
+              placeholder="المحافظة، المدينة، الشارع ورقم المبنى"
+              required
+              aria-describedby="address-error"
+            ></textarea>
+            <p class="field-error" id="address-error"></p>
+          </div>
+
+          <div
+            id="form-status"
+            class="form-status"
+            role="status"
+            aria-live="polite"
+          ></div>
+
+          <button id="submit-button" type="submit">
+            <span class="button-label">تأكيد حضوري في التدريب</span>
+            <span class="spinner" aria-hidden="true"></span>
+          </button>
+        </form>
+
+        <footer>
+          <span aria-hidden="true">🔒</span>
+          بياناتك بأمان ولن نستخدمها إلا لأغراض التدريب والتواصل من مهاستور
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>

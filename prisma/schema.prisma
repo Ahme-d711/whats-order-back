@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AttendanceRegistration {
+  id                String   @id @default(uuid()) @db.Uuid
+  fullName          String   @map("full_name") @db.VarChar(120)
+  whatsOrderPhone   String   @unique(map: "attendance_registrations_whats_order_phone_key") @map("whats_order_phone") @db.VarChar(16)
+  activity          String   @db.VarChar(120)
+  address           String   @db.VarChar(500)
+  submissionKey     String   @unique(map: "attendance_registrations_submission_key_key") @map("submission_key") @db.Uuid
+  createdAt         DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  notifications     AttendanceNotification[]
+
+  @@index([createdAt], map: "attendance_registrations_created_at_idx")
+  @@map("attendance_registrations")
+}
+
+model AttendanceBroadcast {
+  id         Int       @id
+  startsAt   DateTime? @map("starts_at") @db.Timestamptz(3)
+  version    Int       @default(0)
+  meetingUrl String?   @map("meeting_url") @db.VarChar(2000)
+  updatedAt  DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@map("attendance_broadcast")
+}
+
+enum AttendanceNotificationKind {
+  CONFIRMATION
+  SCHEDULE_UPDATE
+  REMINDER_24H
+  REMINDER_1H
+  START
+
+  @@map("attendance_notification_kind")
+}
+
+enum AttendanceNotificationStatus {
+  PENDING
+  SENT
+  FAILED
+  SKIPPED
+
+  @@map("attendance_notification_status")
+}
+
+model AttendanceNotification {
+  id              String                       @id @default(uuid()) @db.Uuid
+  registrationId  String                       @map("registration_id") @db.Uuid
+  scheduleVersion Int                          @map("schedule_version")
+  kind            AttendanceNotificationKind
+  status          AttendanceNotificationStatus
+  error           String?                      @db.VarChar(500)
+  createdAt       DateTime                     @default(now()) @map("created_at") @db.Timestamptz(3)
+  sentAt          DateTime?                    @map("sent_at") @db.Timestamptz(3)
+  registration    AttendanceRegistration       @relation(fields: [registrationId], references: [id], onDelete: Cascade)
+
+  @@unique([registrationId, scheduleVersion, kind], map: "attendance_notifications_registration_version_kind_key")
+  @@index([scheduleVersion, kind], map: "attendance_notifications_version_kind_idx")
+  @@map("attendance_notifications")
+}

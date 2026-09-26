@@ -1,0 +1,279 @@
+:root {
+  color-scheme: light;
+  font-family: Tahoma, Arial, sans-serif;
+  --green: #179553;
+  --green-dark: #117943;
+  --ink: #111827;
+  --muted: #7a8392;
+  --border: #e2e7eb;
+  --danger: #c62828;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  color: var(--ink);
+  background: #f8fcfa;
+}
+
+.page-shell {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 40px 18px;
+}
+
+.registration-card {
+  width: min(100%, 552px);
+  padding: 38px 39px 28px;
+  border: 1px solid #eef1ef;
+  border-radius: 7px;
+  background: #fff;
+  box-shadow:
+    0 9px 18px rgb(14 40 26 / 13%),
+    0 2px 5px rgb(14 40 26 / 9%);
+}
+
+.card-header {
+  margin-bottom: 26px;
+  text-align: center;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: clamp(25px, 5vw, 34px);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.card-header p {
+  margin: 0;
+  color: #727b89;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.field {
+  margin-bottom: 19px;
+}
+
+label {
+  display: block;
+  margin-bottom: 9px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+label span {
+  color: var(--danger);
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: var(--ink);
+  background: #fff;
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+input {
+  height: 50px;
+  padding: 0 14px;
+}
+
+textarea {
+  min-height: 84px;
+  padding: 13px 14px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #87909e;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgb(23 149 83 / 12%);
+}
+
+[aria-invalid='true'] {
+  border-color: var(--danger);
+}
+
+.phone-input {
+  display: flex;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.phone-input:focus-within {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgb(23 149 83 / 12%);
+}
+
+.phone-input input {
+  border: 0;
+  border-radius: 0;
+  text-align: right;
+  box-shadow: none;
+}
+
+.country-code {
+  display: flex;
+  width: 96px;
+  flex: 0 0 96px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #485160;
+  background: #f7f8fa;
+  font-size: 13px;
+}
+
+.hint,
+.field-error {
+  min-height: 0;
+  margin: 6px 2px 0;
+  font-size: 11px;
+}
+
+.hint {
+  color: var(--muted);
+}
+
+.field-error {
+  color: var(--danger);
+}
+
+.field-error:empty {
+  display: none;
+}
+
+.form-status {
+  display: none;
+  margin: 0 0 14px;
+  padding: 11px 13px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.form-status.success,
+.form-status.error {
+  display: block;
+}
+
+.form-status.success {
+  color: #0b6939;
+  background: #e9f7ef;
+}
+
+.form-status.error {
+  color: #9b1c1c;
+  background: #fff0f0;
+}
+
+button {
+  display: flex;
+  width: 100%;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 7px;
+  color: #fff;
+  background: var(--green);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    opacity 160ms ease;
+}
+
+button:hover:not(:disabled) {
+  background: var(--green-dark);
+}
+
+button:focus-visible {
+  outline: 3px solid rgb(23 149 83 / 28%);
+  outline-offset: 3px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+.spinner {
+  display: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgb(255 255 255 / 45%);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+
+button.loading .spinner {
+  display: block;
+}
+
+footer {
+  margin-top: 18px;
+  color: #9aa1ad;
+  font-size: 10px;
+  text-align: center;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .page-shell {
+    padding: 0;
+  }
+
+  .registration-card {
+    min-height: 100vh;
+    padding: 30px 22px 24px;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
